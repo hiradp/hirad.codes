@@ -1,12 +1,12 @@
 import Head from 'next/head';
-import { GetStaticProps, InferGetStaticPropsType } from 'next';
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import ReactMarkdown from 'react-markdown';
 import 'github-markdown-css';
 
 import styles from '../styles/Home.module.css';
 import { ReactElement } from 'react';
 
-export default function Home({ content }: InferGetStaticPropsType<typeof getStaticProps>): ReactElement {
+export default function Home({ content }: InferGetServerSidePropsType<typeof getServerSideProps>): ReactElement {
   /* eslint-disable react/no-children-prop */
   return (
     <div className={styles.container}>
@@ -26,7 +26,7 @@ export default function Home({ content }: InferGetStaticPropsType<typeof getStat
   /* eslint-enable */
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const res = await fetch('https://raw.githubusercontent.com/hiradp/hiradp/main/README.md');
   const content = await res.text();
 

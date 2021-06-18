@@ -1,0 +1,34 @@
+name: Pull Request
+
+on:
+  pull_request:
+    branches:
+      - 'main'
+
+jobs:
+  lint_and_built:
+    name: Lint and build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14'
+          check-latest: true
+
+      - name: Install
+        env:
+          NODE_ENV: development
+        run: |
+          yarn
+
+      - name: Lint
+        run: |
+          yarn lint
+
+      - name: Build
+        run: |
+          yarn build

@@ -1,11 +1,12 @@
-import Head from 'next/head'
-import { GetStaticProps, InferGetStaticPropsType } from 'next'
-import ReactMarkdown from 'react-markdown'
-import 'github-markdown-css'
+import Head from 'next/head';
+import { GetStaticProps, InferGetStaticPropsType } from 'next';
+import ReactMarkdown from 'react-markdown';
+import 'github-markdown-css';
 
-import styles from '../styles/Home.module.css'
+import styles from '../styles/Home.module.css';
+import { ReactElement } from 'react';
 
-export default function Home({ content }: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function Home({ content }: InferGetStaticPropsType<typeof getStaticProps>): ReactElement {
   /* eslint-disable react/no-children-prop */
   return (
     <div className={styles.container}>
@@ -21,24 +22,24 @@ export default function Home({ content }: InferGetStaticPropsType<typeof getStat
         </div>
       </main>
     </div>
-  )
+  );
   /* eslint-enable */
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const res = await fetch('https://raw.githubusercontent.com/hiradp/hiradp/main/README.md')
-  const content = await res.text()
+  const res = await fetch('https://raw.githubusercontent.com/hiradp/hiradp/main/README.md');
+  const content = await res.text();
 
   if (!content || content === '404: Not Found') {
     return {
       notFound: true,
-    }
+    };
   }
 
   return {
     props: {
       content,
     },
-  }
-}
+  };
+};
 

@@ -27,7 +27,14 @@ export default function Home({ content }: InferGetServerSidePropsType<typeof get
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const res = await fetch('https://raw.githubusercontent.com/hiradp/hiradp/main/README.md');
+  const url = process.env.HOME_URL;
+  if (!url) {
+    return {
+      notFound: true,
+    };
+  }
+
+  const res = await fetch(url);
   const content = await res.text();
 
   if (!content || content === '404: Not Found') {

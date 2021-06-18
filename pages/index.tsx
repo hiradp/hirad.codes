@@ -1,8 +1,10 @@
 import Head from 'next/head'
-import Image from 'next/image'
+import { GetStaticProps, InferGetStaticPropsType } from 'next'
+import ReactMarkdown from 'react-markdown'
+
 import styles from '../styles/Home.module.css'
 
-export default function Home() {
+export default function Home({ content }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <div className={styles.container}>
       <Head>
@@ -12,10 +14,26 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Hello 👋
-        </h1>
+        <ReactMarkdown children={content} />
       </main>
     </div>
   )
 }
+
+export const getStaticProps: GetStaticProps = async () => {
+  const res = await fetch('https://raw.githubusercontent.com/hiradp/hiradp/main/README.md')
+  const content = await res.text()
+
+  if (!content || content === '404: Not Found') {
+    return {
+      notFound: true,
+    }
+  }
+
+  return {
+    props: {
+      content,
+    },
+  }
+}
+

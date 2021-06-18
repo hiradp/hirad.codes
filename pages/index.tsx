@@ -1,10 +1,12 @@
 import Head from 'next/head'
 import { GetStaticProps, InferGetStaticPropsType } from 'next'
 import ReactMarkdown from 'react-markdown'
+import 'github-markdown-css'
 
 import styles from '../styles/Home.module.css'
 
 export default function Home({ content }: InferGetStaticPropsType<typeof getStaticProps>) {
+  /* eslint-disable react/no-children-prop */
   return (
     <div className={styles.container}>
       <Head>
@@ -14,10 +16,13 @@ export default function Home({ content }: InferGetStaticPropsType<typeof getStat
       </Head>
 
       <main className={styles.main}>
-        <ReactMarkdown children={content} />
+        <div className='markdown-body'>
+          <ReactMarkdown children={content} />
+        </div>
       </main>
     </div>
   )
+  /* eslint-enable */
 }
 
 export const getStaticProps: GetStaticProps = async () => {

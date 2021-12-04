@@ -1,12 +1,12 @@
 import Head from 'next/head';
-import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import { GetStaticProps, InferGetServerSidePropsType, InferGetStaticPropsType } from 'next';
 import ReactMarkdown from 'react-markdown';
 import 'github-markdown-css';
 
 import styles from '../styles/Home.module.css';
 import { ReactElement } from 'react';
 
-export default function Home({ content }: InferGetServerSidePropsType<typeof getServerSideProps>): ReactElement {
+export default function Home({ content }: InferGetStaticPropsType<typeof getStaticProps>): ReactElement {
   /* eslint-disable react/no-children-prop */
   return (
     <div className={styles.container}>
@@ -26,7 +26,7 @@ export default function Home({ content }: InferGetServerSidePropsType<typeof get
   /* eslint-enable */
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const url = process.env.HOME_URL;
   if (!url) {
     return {

@@ -8,7 +8,7 @@ Install Node v16 and Yarn. Then start with the commands below:
 # Install NVM (https://github.com/nvm-sh/nvm)
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
 
-# Install Node v16
+# Install Node v14
 nvm install 14
 
 # Install Yarn

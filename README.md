@@ -2,9 +2,18 @@
 🚀 Deploy your GitHub README, built with Next.js.
 
 ## Development
-Some commands to get you started:
+Install Node v16 and Yarn. Then start with the commands below:
 
 ```bash
+# Install NVM (https://github.com/nvm-sh/nvm)
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+
+# Install Node v16
+nvm install 16
+
+# Install Yarn
+npm install -g yarn
+
 # Install dependencies
 yarn install
 
